@@ -1,6 +1,16 @@
-# Qwen Code
+# Qwen Code with Ollama Support
 
-> 🚀 **Note**: This project is a fork of [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) with added Ollama support. The original project provides AI-powered command-line workflow tools for developers.
+<div align="center">
+
+**AI-powered command-line workflow tool for developers with local Ollama integration**
+
+[Installation](#installation) • [Quick Start](#quick-start) • [Ollama Setup](#-ollama-local-inference) • [Documentation](./docs/) • [Contributing](./CONTRIBUTING.md)
+
+</div>
+
+## About This Project
+
+This project is an enhanced version of the original [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) repository with added Ollama support for local inference. The original Qwen Code provides AI-powered command-line workflow tools for developers.
 
 <div align="center">
 
@@ -10,10 +20,6 @@
 [![License](https://img.shields.io/github/license/QwenLM/qwen-code.svg)](./LICENSE)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen.svg)](https://nodejs.org/)
 [![Downloads](https://img.shields.io/npm/dm/@qwen-code/qwen-code.svg)](https://www.npmjs.com/package/@qwen-code/qwen-code)
-
-**AI-powered command-line workflow tool for developers**
-
-[Installation](#installation) • [Quick Start](#quick-start) • [Features](#key-features) • [Documentation](./docs/) • [Contributing](./CONTRIBUTING.md)
 
 </div>
 
@@ -57,6 +63,7 @@ For detailed setup instructions, see [Authorization](#authorization).
 - **Workflow Automation** - Automate operational tasks like handling pull requests and complex rebases
 - **Enhanced Parser** - Adapted parser specifically optimized for Qwen-Coder models
 - **Vision Model Support** - Automatically detect images in your input and seamlessly switch to vision-capable models for multimodal analysis
+- **Local Inference** - Run completely offline with Ollama integration (no API keys required)
 
 ## Installation
 
@@ -280,7 +287,7 @@ export OPENAI_MODEL="qwen/qwen3-coder:free"
 
 ## 🦙 Ollama Local Inference (Private & Offline)
 
-Run Qwen Code with your own locally hosted models using [Ollama](https://ollama.com):
+Run Qwen Code with your own locally hosted models using [Ollama](https://ollama.com), enabling completely private and offline AI assistance.
 
 ### Setup
 
@@ -293,54 +300,61 @@ Run Qwen Code with your own locally hosted models using [Ollama](https://ollama.
    
    # Or pull other Qwen models
    ollama pull qwen2:7b
+   ollama pull qwen:7b
    ```
 
 3. **Start Ollama service** - The service typically starts automatically after installation:
    ```bash
-   # If needed, start manually
+   # If needed, start manually (in a separate terminal)
    ollama serve
    ```
 
 ### Configuration
 
-You can configure Qwen Code to use your local Ollama instance in two ways:
-
-#### Method 1: Environment Variables (Recommended)
-
-Set these environment variables to enable Ollama integration:
+Set these environment variables to use Ollama instead of cloud APIs:
 
 ```bash
-# Enable Ollama integration
-export OLLAMA_HOST="http://localhost:11434"
-export OLLAMA_MODEL="qwen3coder"  # or your preferred model
-# Optional: Set API key if required
-# export OLLAMA_API_KEY="your_api_key_here"
+# Ollama configuration
+export OLLAMA_HOST=http://localhost:11434
+export OLLAMA_MODEL=qwen3coder  # or qwen2:7b, qwen:7b, etc.
 ```
 
-#### Method 2: Project `.env` File
-
-Create a `.env` file in your project root:
+Alternatively, create a `.env` file in your project root:
 
 ```env
 OLLAMA_HOST=http://localhost:11434
 OLLAMA_MODEL=qwen3coder
-# Optional: API key if required
-# OLLAMA_API_KEY=your_api_key_here
 ```
 
 ### Benefits
 
-✅ **Complete Privacy** - All inference happens locally on your machine
-✅ **No Internet Required** - Works entirely offline
-✅ **Zero Cost** - No API fees or quotas
-✅ **Full Control** - Customize models and parameters as needed
-✅ **Enterprise Friendly** - Ideal for organizations with strict data policies
+✅ **Complete Privacy** - All processing happens locally on your machine  
+✅ **No Internet Required** - Works entirely offline after initial setup  
+✅ **Zero API Costs** - No monthly fees or usage quotas  
+✅ **Full Control** - Customize models and parameters as needed  
+✅ **Enterprise Friendly** - Ideal for organizations with strict data policies  
+✅ **Always Available** - No rate limits or service outages  
 
 ### Limitations
 
-⚠️ **Hardware Requirements** - Requires sufficient RAM/CPU/GPU resources
-⚠️ **Slower Response Times** - Depends on your hardware specifications
-⚠️ **Model Size Constraints** - Larger models require more system resources
+⚠️ **Hardware Requirements** - Requires sufficient RAM/CPU/GPU resources  
+⚠️ **Slower Response** - Depends on your hardware specifications  
+⚠️ **Model Size Limits** - Larger models require more system resources  
+⚠️ **Initial Setup** - Requires local installation and model downloads  
+
+### Example Usage
+
+Once configured, use Qwen Code normally:
+
+```bash
+# Start an interactive session with local model
+qwen
+
+# Or run a quick command
+qwen -p "Explain the code in this file" < myfile.js
+```
+
+Your queries will now be processed by your local Ollama instance instead of external APIs.
 
 ## Usage Examples
 
@@ -484,3 +498,11 @@ This project is based on [Google Gemini CLI](https://github.com/google-gemini/ge
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=QwenLM/qwen-code&type=Date)](https://www.star-history.com/#QwenLM/qwen-code&Date)
+
+---
+
+<div align="center">
+
+**💡 Pro Tip**: Use the Ollama integration for complete privacy and offline functionality!
+
+</div>
