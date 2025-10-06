@@ -1,5 +1,7 @@
 # Qwen Code
 
+> 🚀 **Note**: This project is a fork of [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) with added Ollama support. The original project provides AI-powered command-line workflow tools for developers.
+
 <div align="center">
 
 ![Qwen Code Screenshot](./docs/assets/qwen-screenshot.png)
@@ -275,6 +277,70 @@ export OPENAI_MODEL="qwen/qwen3-coder:free"
 ```
 
 </details>
+
+## 🦙 Ollama Local Inference (Private & Offline)
+
+Run Qwen Code with your own locally hosted models using [Ollama](https://ollama.com):
+
+### Setup
+
+1. **Install Ollama** - Follow the [official installation guide](https://github.com/ollama/ollama)
+
+2. **Pull a Qwen model** - Download a Qwen model compatible with Ollama:
+   ```bash
+   # Pull the recommended Qwen3-Coder model
+   ollama pull qwen3coder
+   
+   # Or pull other Qwen models
+   ollama pull qwen2:7b
+   ```
+
+3. **Start Ollama service** - The service typically starts automatically after installation:
+   ```bash
+   # If needed, start manually
+   ollama serve
+   ```
+
+### Configuration
+
+You can configure Qwen Code to use your local Ollama instance in two ways:
+
+#### Method 1: Environment Variables (Recommended)
+
+Set these environment variables to enable Ollama integration:
+
+```bash
+# Enable Ollama integration
+export OLLAMA_HOST="http://localhost:11434"
+export OLLAMA_MODEL="qwen3coder"  # or your preferred model
+# Optional: Set API key if required
+# export OLLAMA_API_KEY="your_api_key_here"
+```
+
+#### Method 2: Project `.env` File
+
+Create a `.env` file in your project root:
+
+```env
+OLLAMA_HOST=http://localhost:11434
+OLLAMA_MODEL=qwen3coder
+# Optional: API key if required
+# OLLAMA_API_KEY=your_api_key_here
+```
+
+### Benefits
+
+✅ **Complete Privacy** - All inference happens locally on your machine
+✅ **No Internet Required** - Works entirely offline
+✅ **Zero Cost** - No API fees or quotas
+✅ **Full Control** - Customize models and parameters as needed
+✅ **Enterprise Friendly** - Ideal for organizations with strict data policies
+
+### Limitations
+
+⚠️ **Hardware Requirements** - Requires sufficient RAM/CPU/GPU resources
+⚠️ **Slower Response Times** - Depends on your hardware specifications
+⚠️ **Model Size Constraints** - Larger models require more system resources
 
 ## Usage Examples
 
