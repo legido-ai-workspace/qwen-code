@@ -60,26 +60,16 @@ export class OllamaOpenAICompatibleProvider
     request: OpenAI.Chat.ChatCompletionCreateParams,
     _userPromptId: string,
   ): OpenAI.Chat.ChatCompletionCreateParams {
-    // For Ollama, we need to ensure the stream property is properly set
-    // Ollama works better with streaming disabled by default
-    // But preserve the original request's streaming preference when specified
-    const updatedRequest = { ...request };
-    
     // Use OLLAMA_MODEL environment variable if set, otherwise use the config model
-    const ollamaModel = process.env['OLLAMA_MODEL'];
-    if (ollamaModel) {
-      updatedRequest.model = ollamaModel;
-    } else {
-      // Use the default model from the config if no OLLAMA_MODEL is set
-      updatedRequest.model = this.contentGeneratorConfig.model || request.model;
-    }
+    const ollamaModel = process.env['OLLAMA_MODEL'] || this.contentGeneratorConfig.model;
     
-    if (updatedRequest.stream === undefined) {
-      updatedRequest.stream = false; // Default to non-streaming for Ollama when not specified
-    }
-    // If stream is explicitly set in the original request, preserve it
-    
-    return updatedRequest;
+    // Return a new request object with the model overridden and stream properly handled
+    return {
+      ...request,
+      model: ollamaModel || request.model, // Ensure we have a model specified
+      // Preserve the original stream setting if it exists, otherwise default to false for Ollama
+      stream: request.stream ?? false,
+    };
   }
 
   static isOllamaProvider(
